@@ -1,6 +1,8 @@
 getBirds();
 
 function getBirds() {
+    document.getElementById("errors").innerHTML = "";
+
     fetch("http://localhost:3000/Error-codes")
         .then(res => res.json())
         .then(errors => errors.forEach(renderError));
@@ -52,7 +54,6 @@ document.querySelector("#create-error").addEventListener("submit", (e)=> {
         },
         body: JSON.stringify(newError)
     })
-    // .then(resp=> resp.json())
-    // .then(data=> renderError(data))
+    .then(() => getBirds());
 })
 
