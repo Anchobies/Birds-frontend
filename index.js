@@ -19,3 +19,24 @@ function renderError(error) {
     document.getElementById("errors").appendChild(errorDiv);
     errorDiv.append(errorImage, errorCode, errorShortDescription);
 }
+
+document.querySelector("#search-error").addEventListener("submit", (e) => {
+    e.preventDefault()
+    let errorsDiv = document.querySelector("#errors")
+    errorsDiv.innerHTML = ""
+    fetch("http://localhost:3000/Error-codes")
+        .then(res => res.json())
+        .then(errors => {
+            const filter = errors.filter((error) => {
+                if (error["error-code"].indexOf(e.target.search.value) == -1) {
+                    return false
+                } else {
+                    return true
+                }
+            })
+            filter.forEach(renderError)
+        });
+})
+
+
+
