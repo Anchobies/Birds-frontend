@@ -54,6 +54,7 @@ document.querySelector("#create-error").addEventListener("submit", (e)=> {
         },
         body: JSON.stringify(newError)
     })
-    .then(() => getBirds());
+    .then(() => getBirds())
+    .then(() => e.target.reset());
 })
 
