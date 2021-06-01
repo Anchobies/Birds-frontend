@@ -13,13 +13,28 @@ function renderError(error) {
     const errorImage = document.createElement("img");
     const errorCode = document.createElement("h4");
     const errorShortDescription = document.createElement("p");
+    const errorLongDescription = document.createElement("p");
 
+    errorDiv.className = "error-div";
     errorImage.src = error.image;
     errorCode.textContent = error["error-code"];
     errorShortDescription.textContent = error["error-short-description"];
+    errorShortDescription.className = "short";
+    errorLongDescription.textContent = error["error-long-description"];
+    errorLongDescription.className = "long";
 
     document.getElementById("errors").appendChild(errorDiv);
-    errorDiv.append(errorImage, errorCode, errorShortDescription);
+    errorDiv.append(errorImage, errorCode, errorShortDescription, errorLongDescription);
+
+    errorDiv.addEventListener("click", e => {
+        if (errorLongDescription.className == "long") {
+            errorLongDescription.style.display = "none";
+            errorLongDescription.className = "gone";
+        } else {
+            errorLongDescription.style.display = "block";
+            errorLongDescription.className = "long";
+        }
+    })
 }
 
 document.querySelector("#search-error").addEventListener("submit", (e) => {
@@ -46,6 +61,7 @@ document.querySelector("#create-error").addEventListener("submit", (e)=> {
         "error-code" : e.target["new-error-code"].value,
         "image" : e.target["new-error-image"].value,
         "error-short-description" : e.target["new-short-description"].value,
+        "error-long-description" : e.target["new-long-description"].value
     } 
     fetch("http://localhost:3000/Error-codes", {
         method: "POST",
@@ -57,4 +73,3 @@ document.querySelector("#create-error").addEventListener("submit", (e)=> {
     .then(() => getBirds())
     .then(() => e.target.reset());
 })
-
