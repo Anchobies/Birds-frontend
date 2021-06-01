@@ -38,5 +38,21 @@ document.querySelector("#search-error").addEventListener("submit", (e) => {
         });
 })
 
-
+document.querySelector("#create-error").addEventListener("submit", (e)=> {
+    e.preventDefault()
+    const newError= {
+        "error-code" : e.target["new-error-code"].value,
+        "image" : e.target["new-error-image"].value,
+        "error-short-description" : e.target["new-short-description"].value,
+    } 
+    fetch("http://localhost:3000/Error-codes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newError)
+    })
+    // .then(resp=> resp.json())
+    // .then(data=> renderError(data))
+})
 
