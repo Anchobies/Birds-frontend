@@ -12,7 +12,7 @@ img {
 }
 
 .error-div {
-    height: 725px;
+    height: 775px;
 }
 
 .shrunk {
@@ -30,10 +30,10 @@ body {
 }
 
 #create-bar {
-    padding-bottom: 55px;
+    padding-bottom: 20px;
 }
 
-h1, h2, h3, h4, p {
+h1, h2, h3, h4, p, span {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 } 
 
@@ -53,4 +53,9 @@ h4 {
 .long {
     margin-left: 15px;
     margin-right: 15px;
+}
+
+
+button {
+    margin-left: 20px;
 }

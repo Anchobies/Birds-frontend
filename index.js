@@ -14,6 +14,8 @@ function renderError(error) {
     const errorCode = document.createElement("h4");
     const errorShortDescription = document.createElement("p");
     const errorLongDescription = document.createElement("p");
+    const likeButton = document.createElement("button")
+    const likes = document.createElement("span")
 
     errorDiv.className = "shrunk";
     errorImage.src = error.image;
@@ -23,9 +25,12 @@ function renderError(error) {
     errorLongDescription.textContent = error["error-long-description"];
     errorLongDescription.className = "long";
     errorLongDescription.style.display = "none"
+    likes.className = "likes"
+    likes.textContent=error["error-likes"]+ " likes";
+    likeButton.textContent="like";
 
     document.getElementById("errors").appendChild(errorDiv);
-    errorDiv.append(errorImage, errorCode, errorShortDescription, errorLongDescription);
+    errorDiv.append(errorImage, errorCode, errorShortDescription, errorLongDescription, likes, likeButton);
 
     errorDiv.addEventListener("click", e => {
         if (errorLongDescription.style.display == "block") {
@@ -36,6 +41,24 @@ function renderError(error) {
             errorDiv.className = "error-div";
         }
     })
+
+    likeButton.addEventListener("click", (e)=> {
+        e.stopPropagation()
+        fetch(`http://localhost:3000/Error-codes/${error["id"]}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "error-likes" : +likes.textContent.split(" ")[0]+1
+            })
+        }).then(resp=>resp.json())
+        .then(data=>likes.textContent=data["error-likes"]+ " likes")
+    })
+
+
+
+
 }
 
 document.querySelector("#search-error").addEventListener("submit", (e) => {
@@ -62,7 +85,8 @@ document.querySelector("#create-error").addEventListener("submit", (e)=> {
         "error-code" : e.target["new-error-code"].value,
         "image" : e.target["new-error-image"].value,
         "error-short-description" : e.target["new-short-description"].value,
-        "error-long-description" : e.target["new-long-description"].value
+        "error-long-description" : e.target["new-long-description"].value,
+        "error-likes": 0
     } 
     fetch("http://localhost:3000/Error-codes", {
         method: "POST",
