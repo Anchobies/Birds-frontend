@@ -17,7 +17,6 @@ function renderError(error) {
     const likeButton = document.createElement("button")
     const likes = document.createElement("span")
 
-    errorDiv.className = "shrunk";
     errorImage.src = error.image;
     errorCode.textContent = error["error-code"];
     errorShortDescription.textContent = error["error-short-description"];
@@ -35,10 +34,12 @@ function renderError(error) {
     errorDiv.addEventListener("click", e => {
         if (errorLongDescription.style.display == "block") {
             errorLongDescription.style.display = "none";
-            errorDiv.className = "shrunk";
+            errorShortDescription.style.display="block";
+            errorCode.style.display="block";
         } else {
             errorLongDescription.style.display = "block";
-            errorDiv.className = "error-div";
+            errorShortDescription.style.display="none";
+            errorCode.style.display="none";
         }
     })
 

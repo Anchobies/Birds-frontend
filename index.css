@@ -1,6 +1,8 @@
 img {
      width: 400px;
-     height: 350px;   
+     height: 350px; 
+     border-top-right-radius:10px;
+     border-top-left-radius:10px;  
 }
 
 #errors div {
@@ -9,15 +11,10 @@ img {
     margin-left: 55px;
     margin-bottom: 55px;
     background-color: rgb(17, 187, 136);
+    border-radius:10px;
+    height:650px;
 }
 
-.error-div {
-    height: 775px;
-}
-
-.shrunk {
-    height: 550px;
-}
 
 body {
     text-align: center;
@@ -44,6 +41,7 @@ h1 {
 
 h4 {
     font-size: 30px;
+    padding-top: 50px;
 }
 
 .short {
@@ -59,3 +57,5 @@ h4 {
 button {
     margin-left: 20px;
 }
+
+
