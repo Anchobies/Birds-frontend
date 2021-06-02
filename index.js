@@ -15,24 +15,25 @@ function renderError(error) {
     const errorShortDescription = document.createElement("p");
     const errorLongDescription = document.createElement("p");
 
-    errorDiv.className = "error-div";
+    errorDiv.className = "shrunk";
     errorImage.src = error.image;
     errorCode.textContent = error["error-code"];
     errorShortDescription.textContent = error["error-short-description"];
     errorShortDescription.className = "short";
     errorLongDescription.textContent = error["error-long-description"];
     errorLongDescription.className = "long";
+    errorLongDescription.style.display = "none"
 
     document.getElementById("errors").appendChild(errorDiv);
     errorDiv.append(errorImage, errorCode, errorShortDescription, errorLongDescription);
 
     errorDiv.addEventListener("click", e => {
-        if (errorLongDescription.className == "long") {
+        if (errorLongDescription.style.display == "block") {
             errorLongDescription.style.display = "none";
-            errorLongDescription.className = "gone";
+            errorDiv.className = "shrunk";
         } else {
             errorLongDescription.style.display = "block";
-            errorLongDescription.className = "long";
+            errorDiv.className = "error-div";
         }
     })
 }
