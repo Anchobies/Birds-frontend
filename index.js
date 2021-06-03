@@ -5,7 +5,13 @@ function getBirds() {
 
     fetch("http://localhost:3000/Error-codes")
         .then(res => res.json())
-        .then(errors => errors.forEach(renderError));
+        .then(errors => {
+            const sortedErrors = [...errors].sort((a, b) => (a["error-code"] > b["error-code"]) ? 1 : -1);
+            
+            console.log(sortedErrors);
+
+            sortedErrors.forEach(renderError)
+        });
 }
 
 function renderError(error) {
